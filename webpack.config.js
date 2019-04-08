@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require('webpack');
 
 module.exports = {
   mode: "development",
@@ -8,6 +9,10 @@ module.exports = {
     path: path.join(__dirname, "www"),
     filename: "bundle.js"
   },
+  plugins: [
+    /** We remove non-English languages from BIP39 */
+    new webpack.IgnorePlugin(/^\.\/(?!english)/, /bip39\/src\/wordlists$/),
+  ],
   module: {
     rules: [
       {
